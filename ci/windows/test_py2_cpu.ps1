@@ -19,6 +19,7 @@
 $env:MXNET_LIBRARY_PATH=join-path $pwd.Path windows_package\lib\libmxnet.dll
 $env:PYTHONPATH=join-path $pwd.Path windows_package\python
 $env:MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
+Get-ChildItem Env:
 C:\Python27\Scripts\pip install -r tests\requirements.txt
 C:\Python27\python.exe -m nose -v --with-xunit --xunit-file nosetests_unittest.xml tests\python\unittest
 if (! $?) { Throw ("Error running unittest") }
