@@ -4,3 +4,4 @@ nose
 nose-timer
 numpy
 scipy
+requests
