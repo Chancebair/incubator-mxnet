@@ -16,16 +16,16 @@
 # under the License.
 
 7z x -y windows_package.7z
-$env:MXNET_LIBRARY_PATH=join-path $pwd.Path build\libmxnet.dll
+$env:MXNET_LIBRARY_PATH=join-path $pwd.Path windows_package\lib\libmxnet.dll
 $env:PYTHONPATH=join-path $pwd.Path python
 $env:Path += ";$PATH;C:\Program Files\OpenBLAS-v0.2.19\bin;C:\Program Files\OpenCV-v3.4.1\build\x64\vc14\bin;C:\Program Files\mingw64_dll;C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0\x86"
 $env:MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
 C:\Python27\Scripts\pip  install -r tests\requirements.txt
-C:\Python27\python.exe  -m nose -v --with-xunit --xunit-file nosetests_unittest.xml tests\python\unittest
+C:\Python27\python.exe -m nose -v --with-xunit --xunit-file nosetests_unittest.xml tests\python\unittest
 if (! $?) { Throw ("Error running unittest") }
 C:\Python27\python.exe -m nose -v --with-xunit --xunit-file nosetests_operator.xml tests\python\gpu\test_operator_gpu.py
 if (! $?) { Throw ("Error running tests") }
 C:\Python27\python.exe -m nose -v --with-xunit --xunit-file nosetests_forward.xml tests\python\gpu\test_forward.py
 if (! $?) { Throw ("Error running tests") }
-C:\Python27\python.exe  -m nose -v tests\python\train
+C:\Python27\python.exe -m nose -v tests\python\train
 if (! $?) { Throw ("Error running tests") }
