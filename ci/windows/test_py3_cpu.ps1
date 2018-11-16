@@ -19,8 +19,8 @@
 $env:MXNET_LIBRARY_PATH=join-path $pwd.Path windows_package\lib\libmxnet.dll
 $env:PYTHONPATH=join-path $pwd.Path windows_package\python
 $env:MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
-c:\Anaconda3\envs\py3\Scripts\pip install -r tests\requirements.txt
-c:\Anaconda3\envs\py3\python.exe -m nose -v --with-xunit --xunit-file nosetests_unittest.xml tests\python\unittest
+C:\Python37\Scripts\pip install -r tests\requirements.txt
+C:\Python37\python.exe -m nose -v --with-xunit --xunit-file nosetests_unittest.xml tests\python\unittest
 if (! $?) { Throw ("Error running unittest") }
-c:\Anaconda3\envs\py3\python.exe -m nose -v --with-xunit --xunit-file nosetests_train.xml tests\python\train
+C:\Python37\python.exe-m nose -v --with-xunit --xunit-file nosetests_train.xml tests\python\train
 if (! $?) { Throw ("Error running train tests") }
