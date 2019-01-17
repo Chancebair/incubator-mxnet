@@ -16,12 +16,15 @@
 # under the License.
 
 7z x -y windows_package.7z
+
 $env:MXNET_LIBRARY_PATH=join-path $pwd.Path windows_package\lib\libmxnet.dll
 $env:PYTHONPATH=join-path $pwd.Path python
-$env:Path += ";$PATH;C:\Program Files\OpenBLAS-v0.2.19\bin;C:\Program Files\OpenCV-v3.4.1\build\x64\vc14\bin;C:\Program Files\mingw64_dll;C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0\x86"
+$env:Path += ";$PATH;C:\Program Files\OpenBLAS-v0.2.19\bin;C:\Program Files\OpenCV-v3.4.1\build\x64\vc14\bin;C:\Program Files\mingw64_dll"
 $env:MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
+$env:MXNET_HOME=[io.path]::combine($PSScriptRoot, 'mxnet_home')
+
 C:\Python27\Scripts\pip install -r tests\requirements.txt
-C:\Python27\python.exe -m nose -v --with-xunit --xunit-file nosetests_unittest.xml tests\python\unittest
+C:\Python27\python.exe -m nose -v --with-timer --timer-ok 1 --timer-warning 15 --timer-filter warning,error --with-xunit --xunit-file nosetests_unittest.xml tests\python\unittest
 if (! $?) { Throw ("Error running unittest") }
-C:\Python27\python.exe -m nose -v --with-xunit --xunit-file nosetests_train.xml tests\python\train
+C:\Python27\python.exe -m nose -v --with-timer --timer-ok 1 --timer-warning 15 --timer-filter warning,error --with-xunit --xunit-file nosetests_train.xml tests\python\train
 if (! $?) { Throw ("Error running train tests") }

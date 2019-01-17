@@ -75,7 +75,7 @@ class Sequential(Block):
         return len(self._children)
 
     def hybridize(self, active=True, **kwargs):
-        """Activates or deactivates `HybridBlock`s recursively. Has no effect on
+        """Activates or deactivates `HybridBlock` s recursively. Has no effect on
         non-hybrid children.
 
         Parameters
@@ -160,9 +160,9 @@ class Dense(HybridBlock):
         Activation function to use. See help on `Activation` layer.
         If you don't specify anything, no activation is applied
         (ie. "linear" activation: `a(x) = x`).
-    use_bias : bool
+    use_bias : bool, default True
         Whether the layer uses a bias vector.
-    flatten: bool
+    flatten: bool, default True
         Whether the input tensor should be flattened.
         If true, all but the first axis of input data are collapsed together.
         If false, all but the last axis of input data are kept the same, and the transformation
@@ -537,7 +537,7 @@ class LayerNorm(HybridBlock):
 
     .. math::
 
-      out = \frac{x - mean[data, axis]}{ \sqrt{Var[data, axis]} + \epsilon} * gamma + beta
+      out = \frac{x - mean[data, axis]}{ \sqrt{Var[data, axis] + \epsilon}} * gamma + beta
 
     Parameters
     ----------
