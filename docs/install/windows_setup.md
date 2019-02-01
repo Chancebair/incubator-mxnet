@@ -121,17 +121,50 @@ We provide two primary options to build and install MXNet yourself using [Micros
 
 You also have the option to install MXNet with MKL or MKL-DNN. In this case it is recommended that you refer to the [MKLDNN_README](https://github.com/apache/incubator-mxnet/blob/master/MKLDNN_README.md).
 
-**Option 1: Build with Microsoft Visual Studio 2017 (VS2017)**
+### Option 1: Build with Microsoft Visual Studio 2017 (VS2017)
 
+**Script**  
+
+Open Powershell
+1. Install Chocolatey Package Manager
+```cmd
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+```
+2. Refresh environment variables
+```cmd
+refreshenv
+```
+3. Install Python and packages
+```cmd
+choco install python3 -y
+```
+*You might need to open a new Powershell window*
+```cmd
+python -m pip install --upgrade pip requests psutil
+```
+4. Install Git if you haven't already
+```cmd
+choco install git -y
+```
+5. Run install dependency script
+```cmd
+python ./install_dependencies_windows.py --gpu true
+```
+**OR**
+```cmd
+python ./install_dependencies_windows.py --cpu true
+```
+
+**Manually**  
 To build and install MXNet yourself using [VS2017](https://www.visualstudio.com/downloads/), you need the following dependencies. You may try a newer version of a particular dependency, but please open a pull request or [issue](https://github.com/apache/incubator-mxnet/issues/new) to update this guide if a newer version is validated.
 
 1. Install or update VS2017.
     - If [VS2017](https://www.visualstudio.com/downloads/) is not already installed, download and install it. You can download and install the free community edition.
     - When prompted about installing Git, go ahead and install it.
     - If VS2017 is already installed you will want to update it. Proceed to the next step to modify your installation. You will be given the opportunity to update VS2017 as well
-1. Follow the [instructions for opening the Visual Studio Installer](https://docs.microsoft.com/en-us/visualstudio/install/modify-visual-studio) to modify `Individual components`.
-1. Once in the Visual Studio Installer application, update as needed, then look for and check `VC++ 2017 version 15.4 v14.11 toolset`, and click `Modify`.
-1. Change the version of the Visual studio 2017 to v14.11 using the following command (by default the VS2017 is installed in the following path):
+2. Follow the [instructions for opening the Visual Studio Installer](https://docs.microsoft.com/en-us/visualstudio/install/modify-visual-studio) to modify `Individual components`.
+3. Once in the Visual Studio Installer application, update as needed, then look for and check `VC++ 2017 version 15.4 v14.11 toolset`, and click `Modify`.
+4. Change the version of the Visual studio 2017 to v14.11 using the following command (by default the VS2017 is installed in the following path):
 ```
 "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.11
 ```
@@ -172,7 +205,7 @@ msbuild mxnet.sln /p:Configuration=Release;Platform=x64 /maxcpucount
 ```
 
 
-**Option 2: Build with Visual Studio 2015**
+### Option 2: Build with Visual Studio 2015
 
 To build and install MXNet yourself using [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-downloads/), you need the following dependencies. You may try a newer version of a particular dependency, but please open a pull request or [issue](https://github.com/apache/incubator-mxnet/issues/new) to update this guide if a newer version is validated.
 
